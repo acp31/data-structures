@@ -8,7 +8,7 @@ HashTable.prototype.insert = function(k, v){
   var tuple = [[k, v]]
   var check = false;
   //if (!this._storage.get()) {
-  if(this._storage.get(i)){
+  if(!!this._storage.get(i)){
     var temp = this._storage.get(i)
     for (var x = 0; x < temp.length; x++) {
       if (temp[x][0] === k) {
@@ -17,6 +17,7 @@ HashTable.prototype.insert = function(k, v){
       }
     }
     if (!check) {
+      tuple = [k, v];
       temp.push(tuple);
       this._storage.set(i, temp);
     } 
@@ -24,6 +25,7 @@ HashTable.prototype.insert = function(k, v){
   else {
     this._storage.set(i, tuple);
   }
+  console.log(this._storage.get(i));
 };
 
 HashTable.prototype.retrieve = function(k){
@@ -31,7 +33,7 @@ HashTable.prototype.retrieve = function(k){
   var temp = this._storage.get(i);
   for (var x = 0; x < temp.length; x++) {
     if (temp[x] !== null && temp[x][0] === k) {
-    return temp[x][1];
+      return temp[x][1];
     }
   }
   return null;
